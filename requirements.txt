@@ -1,9 +1,10 @@
 streamlit
 tensorflow==2.16.1
-keras==3.13.2
+keras==3.12.1
 numpy==1.26.4
 pandas==2.1.4
 scikit-learn==1.3.2
+yfinance
 nltk==3.9.1
 gensim==4.3.2
 beautifulsoup4
