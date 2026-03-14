@@ -4,28 +4,29 @@ import numpy as np
 from tensorflow.keras.models import load_model
 from keras.preprocessing.sequence import pad_sequences
 
-# ----------------------------------
+# -------------------------------
 # Configuration
-# ----------------------------------
+# -------------------------------
 
-MAX_LEN = 100   # must match training sequence length
+MAX_LEN = 100   # must match training length
 
-# ----------------------------------
+
+# -------------------------------
 # Load ML Assets
-# ----------------------------------
+# -------------------------------
 
 @st.cache_resource
 def load_assets():
 
-    model = load_model("streamlit_assets/market_model.h5")
+    model = load_model("market_model.h5")
 
-    with open("streamlit_assets/tokenizer.pkl", "rb") as f:
+    with open("tokenizer.pkl", "rb") as f:
         tokenizer = pickle.load(f)
 
-    with open("streamlit_assets/lda_model.pkl", "rb") as f:
+    with open("lda_model.pkl", "rb") as f:
         lda = pickle.load(f)
 
-    with open("streamlit_assets/lda_vectorizer.pkl", "rb") as f:
+    with open("lda_vectorizer.pkl", "rb") as f:
         vec = pickle.load(f)
 
     return model, tokenizer, lda, vec
@@ -33,22 +34,23 @@ def load_assets():
 
 model, tokenizer, lda, vec = load_assets()
 
-# ----------------------------------
-# UI
-# ----------------------------------
 
-st.title("📊 Financial Market Intelligence Dashboard")
+# -------------------------------
+# UI
+# -------------------------------
+
+st.title("📊 Financial Market Intelligence")
 
 st.write(
-    "Analyze financial news and predict potential market sentiment using a trained AI model."
+    "Predict potential market sentiment from financial news using an AI model."
 )
 
-news_input = st.text_area("Enter Financial News Headline or Article")
+news_input = st.text_area("Enter Financial News Text")
 
 
-# ----------------------------------
-# Prediction Pipeline
-# ----------------------------------
+# -------------------------------
+# Prediction
+# -------------------------------
 
 if st.button("Predict Market Sentiment"):
 
@@ -58,23 +60,21 @@ if st.button("Predict Market Sentiment"):
 
     try:
 
-        # Text → Token sequence
+        # Convert text to sequence
         seq = tokenizer.texts_to_sequences([news_input])
-
         padded_seq = pad_sequences(seq, maxlen=MAX_LEN)
 
-        # Topic features
+        # LDA topic features
         vec_news = vec.transform([news_input])
         topic_features = lda.transform(vec_news)
 
-        # Model prediction
+        # Prediction
         prediction = model.predict([padded_seq, topic_features])
 
         score = float(prediction[0][0])
 
         st.subheader("Prediction Result")
-
-        st.write("Confidence Score:", round(score, 4))
+        st.write("Confidence:", round(score, 4))
 
         if score > 0.5:
             st.success("📈 Positive Market Sentiment")
@@ -82,6 +82,5 @@ if st.button("Predict Market Sentiment"):
             st.error("📉 Negative Market Sentiment")
 
     except Exception as e:
-
-        st.error("Prediction failed. Please check model inputs.")
+        st.error("Prediction failed.")
         st.exception(e)
