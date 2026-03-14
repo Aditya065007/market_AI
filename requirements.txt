@@ -1,8 +1,8 @@
-streamlit==1.45.0
+streamlit==1.55.0
 tensorflow==2.19.0
 keras==3.13.2
 numpy==2.0.2
-pandas==3.0.1
+pandas==2.3.3
 scikit-learn==1.8.0
 yfinance
 nltk==3.9.1
