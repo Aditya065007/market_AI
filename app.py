@@ -18,7 +18,7 @@ MAX_LEN = 100   # must match training length
 @st.cache_resource
 def load_assets():
 
-    model = load_model("market_model.h5")
+    model = load_model("market_model.h5", compile = False)
 
     with open("tokenizer.pkl", "rb") as f:
         tokenizer = pickle.load(f)
