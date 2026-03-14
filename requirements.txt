@@ -1,0 +1,12 @@
+streamlit
+tensorflow
+keras
+numpy
+pandas
+scikit-learn
+nltk
+gensim
+beautifulsoup4
+lxml
+lime
+shap
