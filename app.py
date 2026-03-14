@@ -143,17 +143,22 @@ footer { display: none !important; }
     display: none !important;
 }
 
-[data-testid="stTextArea"] textarea {
-    background: rgba(255,255,255,0.04) !important;
+[data-testid="stTextArea"] textarea,
+[data-testid="stTextArea"] textarea:focus,
+[data-testid="stTextArea"] textarea:active,
+textarea, textarea:focus {
+    background: #0D1520 !important;
     border: 1.5px solid rgba(255,255,255,0.1) !important;
     border-radius: 14px !important;
     color: #E8EDF5 !important;
+    caret-color: #00D4AA !important;
     font-family: 'DM Sans', sans-serif !important;
     font-size: 15px !important;
     line-height: 1.6 !important;
     padding: 1rem 1.1rem !important;
     resize: none !important;
     transition: border-color 0.2s, box-shadow 0.2s !important;
+    -webkit-text-fill-color: #E8EDF5 !important;
 }
 
 [data-testid="stTextArea"] textarea:focus {
@@ -164,6 +169,17 @@ footer { display: none !important; }
 
 [data-testid="stTextArea"] textarea::placeholder {
     color: #3D5068 !important;
+    -webkit-text-fill-color: #3D5068 !important;
+}
+
+/* Force dark background on all inputs */
+.stTextArea, .stTextArea > div, .stTextArea > div > div {
+    background: transparent !important;
+}
+
+[data-baseweb="textarea"], [data-baseweb="base-input"] {
+    background: #0D1520 !important;
+    border-radius: 14px !important;
 }
 
 /* ── Button ── */
