@@ -1,6 +1,6 @@
 # MarketAI — Multi-Modal Market Sentiment Predictor
 
-**Live App:** [Add your Streamlit link here]
+**Live App:** https://marketai-vzbkkbt7amtfoqvt3pzowz.streamlit.app/
 
 A Streamlit app that combines three very different kinds of data — financial news text, recent price history, and topic modeling — into a single neural network that predicts next-day S&P 500 closing price and market sentiment direction. This project is a research and architecture exercise in fusing multiple data modalities into one model; it does not report a validated accuracy figure, and its predictions should be read as illustrative of the technique rather than as financial advice.
 
